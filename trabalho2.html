@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TecnoCursos</title>
+</head>
+<body>
+  <header>
+    <h1>TecnoCursos - Curso de Tecnologia</h1>
+  </header>
+
+  <h2>Selecione um curso para saber mais:</h2>
+
+  <ul>
+    <li onclick="carregarcurso('javascript')">Curso de JavaScript</li>
+    <li onclick="carregarcurso('python')">Curso de Python</li>
+    <li onclick="carregarcurso('java')">Curso de Java</li>
+    <li onclick="carregarcurso('css e html')">Curso de CSS e HTML</li>
+  </ul>
+
+  <div id="detalhes"></div>
+
+  <footer>
+    &copy; 2025 TecnoCursos. Todos os direitos reservados.
+    <p>Telefone: (31) 98848-5615</p>
+    <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+  </footer>
+
+  <script>
+    async function carregarcurso(curso) {
+      const detalhes = document.getElementById("detalhes");
+      detalhes.innerHTML = "Carregando informações do curso...";
+
+      // Simula um atraso de carregamento
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      let info = "";
+      switch (curso) {
+        case "javascript":
+          info = "<h3>Curso de JavaScript</h3><p>Aprenda a programar para web com JavaScript, manipulando DOM, eventos e APIs modernas.</p>";
+          break;
+        case "python":
+          info = "<h3>Curso de Python</h3><p>Domine Python para automação, análise de dados e desenvolvimento web.</p>";
+          break;
+        case "java":
+          info = "<h3>Curso de Java</h3><p>Entenda a programação orientada a objetos e crie aplicações robustas em Java.</p>";
+          break;
+        case "css e html":
+          info = "<h3>Curso de CSS e HTML</h3><p>Aprenda a estruturar páginas web com HTML e estilizar com CSS.</p>";
+          break;
+        default:
+          info = "<p>Curso não encontrado.</p>";
+      }
+
+      detalhes.innerHTML = info;
+    }
+  </script>
+</body>
+</html>
+
+
