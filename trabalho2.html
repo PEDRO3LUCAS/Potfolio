@@ -1,62 +1,202 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TecnoCursos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Curso</title>
+    <style>
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .curso-info {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        li {
+            cursor: pointer;
+            margin-bottom: 10px;
+            list-style: none;
+            padding: 15px;
+            background-color: #e9f0ff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            position: relative;
+        }
+
+        li:hover {
+            background-color: #d0e2ff;
+        }
+
+        .info-escondida {
+            display: none;
+            margin-top: 12px;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        li.ativo .info-escondida {
+            display: block;
+        }
+
+        
+        .carregando::after {
+            content: " (carregando...)";
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsividade */
+       
+        @media (max-width: 768px) {
+            main {
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>TecnoCursos - Curso de Tecnologia</h1>
-  </header>
 
-  <h2>Selecione um curso para saber mais:</h2>
+    <header>
+        <h1>Detalhes do Curso</h1>
+    </header>
 
-  <ul>
-    <li onclick="carregarcurso('javascript')">Curso de JavaScript</li>
-    <li onclick="carregarcurso('python')">Curso de Python</li>
-    <li onclick="carregarcurso('java')">Curso de Java</li>
-    <li onclick="carregarcurso('css e html')">Curso de CSS e HTML</li>
-  </ul>
+    <main>
+        
+        <h2 id="curso-titulo">Curso de JavaScript</h2>
 
-  <div id="detalhes"></div>
+        <div class="curso-info" id="descricao-curso">
+            <p>O curso de JavaScript ensina desde o básico até conceitos avançados para desenvolver aplicações interativas na web.</p>
+            <h3>Conteúdo do curso:</h3>
+            <p>O curso de JavaScript ensina desde os conceitos mais básicos até técnicas avançadas, capacitando o aluno a desenvolver aplicações modernas, dinâmicas e interativas para a web.</p>
+            <h3>Conteúdo do curso (clique nos tópicos para mais detalhes):</h3>
+            <ul>
+                <li>Introdução ao JavaScript</li>
+                <li>Manipulação de DOM</li>
+                <li>Funções e Objetos</li>
+                <li>Desenvolvimento de projetos</li>
+                <li onclick="toggleInfoAsync(this)">
+                    Introdução ao JavaScript
+                    <div class="info-escondida">
+                        Neste módulo, você aprenderá o que é JavaScript, sua importância no desenvolvimento web, como integrá-lo em páginas HTML e como executar seus primeiros scripts. Também será introduzido aos principais conceitos da linguagem, como variáveis, operadores, tipos de dados e estruturas de decisão.
+                    </div>
+                </li>
+                <li onclick="toggleInfoAsync(this)">
+                    Manipulação de DOM
+                    <div class="info-escondida">
+                        Aqui você aprenderá como interagir com os elementos HTML por meio do DOM (Document Object Model). Isso inclui como selecionar elementos da página, alterar conteúdos, adicionar ou remover classes, manipular atributos e criar efeitos dinâmicos que respondem às ações do usuário em tempo real.
+                    </div>
+                </li>
+                <li onclick="toggleInfoAsync(this)">
+                    Funções e Objetos
+                    <div class="info-escondida">
+                        Neste tópico, aprofundamos o uso de funções em JavaScript, incluindo funções anônimas, arrow functions e callbacks. Você também aprenderá a trabalhar com objetos, criar propriedades e métodos, além de entender conceitos como encapsulamento, herança e orientação a objetos com JavaScript moderno (ES6+).
+                    </div>
+                </li>
+                <li onclick="toggleInfoAsync(this)">
+                    Desenvolvimento de projetos
+                    <div class="info-escondida">
+                        Esta etapa do curso é totalmente prática. Você aplicará tudo o que aprendeu em projetos reais, como uma calculadora funcional, um gerenciador de tarefas (to-do list) e uma galeria de imagens com filtros. O objetivo é consolidar o conhecimento e criar um portfólio inicial com projetos interativos e bem estruturados.
+                    </div>
+                </li>
+            </ul>
+        </div>
 
-  <footer>
-    &copy; 2025 TecnoCursos. Todos os direitos reservados.
-    <p>Telefone: (31) 98848-5615</p>
-    <a href="https://www.instagram.com/" target="_blank">Instagram</a>
-  </footer>
+        <a href=http://127.0.0.1:5500/aula4/atividade.html>Voltar para a página inicial</a>
+        <a href="atividade.html">Voltar para a página inicial</a>
+    </main>
 
-  <script>
-    async function carregarcurso(curso) {
-      const detalhes = document.getElementById("detalhes");
-      detalhes.innerHTML = "Carregando informações do curso...";
+    <footer>
+        <p>&copy; 2025 Tecnocursos. Todos os direitos reservados.</p>
+    </footer>
 
-      // Simula um atraso de carregamento
-      await new Promise(resolve => setTimeout(resolve, 2000));
+    <script>
+        async function toggleInfoAsync(item) {
+      
+            if (item.classList.contains("carregando")) return;
 
-      let info = "";
-      switch (curso) {
-        case "javascript":
-          info = "<h3>Curso de JavaScript</h3><p>Aprenda a programar para web com JavaScript, manipulando DOM, eventos e APIs modernas.</p>";
-          break;
-        case "python":
-          info = "<h3>Curso de Python</h3><p>Domine Python para automação, análise de dados e desenvolvimento web.</p>";
-          break;
-        case "java":
-          info = "<h3>Curso de Java</h3><p>Entenda a programação orientada a objetos e crie aplicações robustas em Java.</p>";
-          break;
-        case "css e html":
-          info = "<h3>Curso de CSS e HTML</h3><p>Aprenda a estruturar páginas web com HTML e estilizar com CSS.</p>";
-          break;
-        default:
-          info = "<p>Curso não encontrado.</p>";
-      }
+            
+            item.classList.add("carregando");
 
-      detalhes.innerHTML = info;
-    }
-  </script>
+            
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+           
+            item.classList.toggle("ativo");
+
+            
+            item.classList.remove("carregando");
+        }
+    </script>
+
 </body>
 </html>
-
 
