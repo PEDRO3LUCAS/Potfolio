@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Agência de Viagens - Destinos Incríveis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #630404;
+        }
+
+        header {
+            background-color: #3498db;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .destinos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .destino {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 300px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .destino:hover {
+            transform: scale(1.03);
+        }
+
+        .destino img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .destino h2 {
+            margin: 10px;
+            color: #333;
+        }
+
+        .destino p {
+            margin: 10px;
+            color: #666;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Explore o Mundo com a Gente!</h1>
+        <p>Descubra destinos incríveis e viva experiências únicas</p>
+    </header>
+
+    <section class="destinos">
+
+        <div class="destino">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Salvador_Bahia_Brazil_City_Skyline.jpg" alt="Salvador">
+            <h2>Salvador</h2>
+            <p>História, cultura afro-brasileira, praias maravilhosas e o melhor do axé baiano.</p>
+        </div>
+
+        <div class="destino">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Praia_de_Ponta_Negra_em_Natal.jpg" alt="Natal">
+            <h2>Natal</h2>
+            <p>Dunas incríveis, mar cristalino e o famoso pôr do sol na Praia de Ponta Negra.</p>
+        </div>
+
+        <div class="destino">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Santiago_chile_cityscape.jpg" alt="Santiago">
+            <h2>Santiago</h2>
+            <p>A capital do Chile oferece neve, vinhos, cordilheira e uma vida urbana vibrante.</p>
+        </div>
+
+        <div class="destino">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Buenos_Aires_-_View.jpg" alt="Buenos Aires">
+            <h2>Buenos Aires</h2>
+            <p>Tango, arquitetura charmosa e culinária incrível na capital da Argentina.</p>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Agência de Viagens. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
