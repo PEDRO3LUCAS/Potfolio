@@ -1,35 +1,36 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="en">
 <head>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blá</title>
     <link rel="icon" href="software.png" type="image/png" />
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="000000">
+    <meta name="theme-color" content="#000000">
 
 
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        
 
-        body {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Poppins', sans-serif;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            transition: background-image 2s ease-in-out;
-            color: #333;
-        }
+  body {
+        margin: 0;
+        height: 100vh;
+        /*Ocupa toda a altura da tela*/
+        display: flex;
+        /*ativa flexbox*/
+        justify-content: center;
+        /*centraliza verticalmente*/
+        align-items: center;
+        /*centraliza horizontalmente*/
+        font-family: cursive;
+        background-size: cover;
+        /*imagem ocupa toda a tela*/
+        background-position: center;
+        background-repeat: no-repeat;
+        /*impede a repetição da imagem*/
+    }
 
         .container {
             width: 500px;
@@ -44,14 +45,7 @@
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.842);
         }
 
-        .container h1,
-        .container h2,
-        .container h3,
-        .container h4,
-        .container h5 {
-            margin: 10px 0;
-            font-family: sans-serif;
-        }
+
         @media (max-width: 400px) {
         h1 {
             font-size: 22px;
@@ -77,6 +71,7 @@
         <h5 id="frase"></h5>
     </div>
 
+</body>
     <script>
         let frases = [];
 
@@ -115,36 +110,25 @@
             }
 
             if (hora >= 6 && hora < 12) {
-                classe = "manha";
-                img = 'imagem/manha.jpg';
-                saudacao = "Bom dia!🌤️";
-                frases = [
-                    "🌅 Comece com energia!",
-                    "☕ Acordou, venceu!",
-                    "💡 Hoje é seu dia!",
-                ];
-            } else if (hora >= 12 && hora < 18) {
-                img = 'imagem/tarde.jpg';
-                classe = "tarde";
-                saudacao = "Boa tarde!☀️";
-                frases = ["🚀 Siga firme!", "🎯 Você está indo bem!", "🔥 Foco no agora!"];
-            } else if (hora >= 18 && hora < 23) {
-                img = 'imagem/noite.jpg';
-                classe = "noite";
-                saudacao = "Boa noite!🌕";
-                frases = [
-                    "🌙 Dia bem vivido!",
-                    "📘 Hora de relaxar.",
-                    "💤 Você fez o seu melhor.",
-                ];
-            } else {
-                img = 'imagem/madrugada.jpg';
-                classe = "madrugada";
-                saudacao = "Hora de descansar! 🌙";
-                frases = ["🛌 Descanse bem.", "🌌 Sonhe alto.", "🧘‍♂️ Amanhã será incrível."];
-            }
+    img = 'imagens/manha.jpg';
+    saudacao = "Bom dia!🌤️";
+    frases = ["🌅 Comece com energia!", "☕ Acordou, venceu!", "💡 Hoje é seu dia!"];
+} else if (hora >= 12 && hora < 18) {
+    img = 'imagens/tarde.jpg';
+    saudacao = "Boa tarde!☀️";
+    frases = ["🚀 Siga firme!", "🎯 Você está indo bem!", "🔥 Foco no agora!"];
+} else if (hora >= 18 && hora < 23) {
+    img = 'imagens/noite.jpg';
+    saudacao = "Boa noite!🌕";
+    frases = ["🌙 Dia bem vivido!", "📘 Hora de relaxar.", "💤 Você fez o seu melhor."];
+} else {
+    img = 'imagens/noite.jpg'; // <-- corrigido
+    saudacao = "Hora de descansar! 🌙";
+    frases = ["🛌 Descanse bem.", "🌌 Sonhe alto.", "🧘‍♂️ Amanhã será incrível."];
+}
 
-            document.body.style.backgroundImage = "url('" + imgFundo + "')";;
+
+            document.body.style.backgroundImage = "url('" + img + "')";;
             document.getElementById("titulo").innerText = saudacao;
             document.getElementById("hora").innerText = `Agora são ${horario}`;
             document.getElementById("data").innerText = `${dataFormatada}`;
@@ -169,9 +153,6 @@
                 .catch(err => console.log(" Erro no SW:", err));
         }
     </script>
-</body>
 
 
 </html>
-
-
