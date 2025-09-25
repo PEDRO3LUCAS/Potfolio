@@ -31,39 +31,6 @@
             color: #333;
         }
 
-        .manha {
-            background-image: url("manha.jpg");
-            background-size: 100% 100%, contain;
-            background-position: center;
-            background-color: yellow;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-
-        .tarde {
-            background-image: url("tarde.jpg");
-            background-size: 100% 100%, contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-
-        .noite {
-            background-image: url("noite.jpg");
-            background-size: 100% 100%, contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-
-        .madrugada {
-            background-image: url("madrugada.jpg");
-            background-size: 100% 100%, contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-
         .container {
             width: 500px;
             max-width: 90%;
@@ -84,6 +51,18 @@
         .container h5 {
             margin: 10px 0;
             font-family: sans-serif;
+        }
+        @media (max-width: 400px) {
+        h1 {
+            font-size: 22px;
+        }
+
+        p {
+            font-size: 14px;
+        }
+
+        .container {
+            width: 70%;
         }
     </style>
 </head>
@@ -110,6 +89,7 @@
             let saudacao;
             let classe;
             let tipoDeDia;
+            let img;
 
             const opcoesData = {
                 weekday: "long",
@@ -135,6 +115,7 @@
 
             if (hora >= 6 && hora < 12) {
                 classe = "manha";
+                img = 'imagens/manha.jpg';
                 saudacao = "Bom dia!🌤️";
                 frases = [
                     "🌅 Comece com energia!",
@@ -142,10 +123,12 @@
                     "💡 Hoje é seu dia!",
                 ];
             } else if (hora >= 12 && hora < 18) {
+                img = 'imagens/tarde.jpg';
                 classe = "tarde";
                 saudacao = "Boa tarde!☀️";
                 frases = ["🚀 Siga firme!", "🎯 Você está indo bem!", "🔥 Foco no agora!"];
             } else if (hora >= 18 && hora < 23) {
+                img = 'imagens/noite.jpg';
                 classe = "noite";
                 saudacao = "Boa noite!🌕";
                 frases = [
@@ -154,12 +137,13 @@
                     "💤 Você fez o seu melhor.",
                 ];
             } else {
+                img = 'imagens/madrugada.jpg';
                 classe = "madrugada";
                 saudacao = "Hora de descansar! 🌙";
                 frases = ["🛌 Descanse bem.", "🌌 Sonhe alto.", "🧘‍♂️ Amanhã será incrível."];
             }
 
-            document.body.className = classe;
+            document.body.style.backgroundImage = "url('" + imgFundo + "')";;
             document.getElementById("titulo").innerText = saudacao;
             document.getElementById("hora").innerText = `Agora são ${horario}`;
             document.getElementById("data").innerText = `${dataFormatada}`;
@@ -177,9 +161,7 @@
         trocarFrase();
         setInterval(trocar, 1000);
         setInterval(trocarFrase, 5000);
-    </script>
 
-    <script>
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("service-worker.js")
                 .then(() => console.log("Service Worker registrado"))
@@ -187,5 +169,6 @@
         }
     </script>
 </body>
+
 
 </html>
