@@ -1,6 +1,6 @@
 {
-  "name": "App CheckDay",
-  "short_name": "CheckDay",
+  "name": "App DayNow",
+  "short_name": "DayNow",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
