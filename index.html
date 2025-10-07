@@ -1,111 +1,340 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Agência de Viagens - Destinos Incríveis</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #630404;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LuxuryCars — Venda de Carros de Luxo</title>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo="> <!-- pequeno placeholder -->
+  <style>
+    :root{
+      --accent:#0f172a; /* azul-escuro */
+      --muted:#6b7280;
+      --card:#ffffff;
+      --glass: rgba(255,255,255,0.06);
+      --rounded:14px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#0b1020 0%, #0f172a 70%);color:#e6eef8;min-height:100vh}
+    header{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;border-bottom:1px solid rgba(255,255,255,0.04)}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#f59e0b,#ef4444);display:flex;align-items:center;justify-content:center;font-weight:700;color:#111}
+    .title{font-size:1.15rem;font-weight:700}
 
-        header {
-            background-color: #3498db;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
+    .container{max-width:1200px;margin:28px auto;padding:0 20px}
 
-        h1 {
-            margin: 0;
-        }
+    .hero{display:flex;gap:20px;align-items:center;justify-content:space-between;margin-bottom:20px}
+    .hero .intro{max-width:620px}
+    .hero h1{margin:0;font-size:2rem}
+    .hero p{color:var(--muted);margin-top:8px}
 
-        .destinos {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px;
-            gap: 20px;
-        }
+    .controls{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+    .search{padding:10px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit;min-width:220px}
+    .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;border:none;cursor:pointer}
+    .chip{background:var(--glass);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03);cursor:pointer}
 
-        .destino {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            width: 300px;
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
+    /* grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:22px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);backdrop-filter: blur(6px)}
+    .thumb{width:100%;height:160px;overflow:hidden;border-radius:10px}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .meta{display:flex;align-items:center;justify-content:space-between;padding-top:10px}
+    .meta h3{margin:0;font-size:1rem}
+    .price{font-weight:800}
+    .specs{color:var(--muted);font-size:0.9rem;margin-top:8px}
 
-        .destino:hover {
-            transform: scale(1.03);
-        }
+    .card footer{display:flex;gap:8px;margin-top:12px}
+    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:inherit;cursor:pointer}
 
-        .destino img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
+    /* modal */
+    .modal-backdrop{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;z-index:60}
+    .modal-backdrop.show{display:flex}
+    .modal{width:100%;max-width:920px;background:linear-gradient(180deg,#0b1220,#091021);border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.06);box-shadow:0 20px 50px rgba(2,6,23,0.7)}
+    .modal .row{display:flex;gap:16px}
+    .modal .col-img{flex:1}
+    .modal .col-info{flex:1;display:flex;flex-direction:column}
+    .modal img{width:100%;height:360px;object-fit:cover;border-radius:10px}
+    .modal h2{margin:0}
+    .close{margin-left:auto;background:transparent;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer}
 
-        .destino h2 {
-            margin: 10px;
-            color: #333;
-        }
+    footer.site{max-width:1200px;margin:40px auto;color:var(--muted);text-align:center}
 
-        .destino p {
-            margin: 10px;
-            color: #666;
-        }
+    @media (max-width:720px){
+      .hero{flex-direction:column;align-items:flex-start}
+      .modal .row{flex-direction:column}
+      .modal img{height:220px}
+    }
 
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 15px 0;
-            margin-top: 30px;
-        }
-    </style>
+    
+      
+    
+  </style>
 </head>
 <body>
+  <header>
+    <div class="brand">
+      <div class="logo">LC</div>
+      <div>
+        <div class="title">LuxuryCars</div>
+        <div style="color:var(--muted);font-size:0.85rem">Venda de carros de luxo</div>
+      </div>
+    </div>
+    <nav>
+      <button class="chip" onclick="location.href='#catalog'">Catálogo</button>
+      <button class="chip" onclick="location.href='#contato'">Contato</button>
+    </nav>
+  </header>
 
-    <header>
-        <h1>Explore o Mundo com a Gente!</h1>
-        <p>Descubra destinos incríveis e viva experiências únicas</p>
-    </header>
+  <main class="container">
+    <section class="hero">
+      <div class="intro">
+        <h1>Encontre o carro de luxo perfeito</h1>
+        <p>Selecione entre os melhores modelos — SUVs, coupés, sedans e conversíveis de marcas top. Veja fotos, especificações e peça uma proposta.</p>
 
-    <section class="destinos">
-
-        <div class="destino">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Salvador_Bahia_Brazil_City_Skyline.jpg" alt="Salvador">
-            <h2>Salvador</h2>
-            <p>História, cultura afro-brasileira, praias maravilhosas e o melhor do axé baiano.</p>
+          <input id="search" class="search" placeholder="Procurar por modelo, marca..." oninput="renderCards()">
+          <button class="btn" onclick="resetFilters()">Limpar filtros</button>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button class="chip" data-filter="all" onclick="setFilter('all')">Todos</button>
+            <button class="chip" data-filter="SUV" onclick="setFilter('SUV')">SUV</button>
+            <button class="chip" data-filter="Sedan" onclick="setFilter('Sedan')">Sedan</button>
+            <button class="chip" data-filter="Coupe" onclick="setFilter('Coupe')">Coupe</button>
+            <button class="chip" data-filter="Convertible" onclick="setFilter('Convertible')">Conversível</button>
+          </div>
         </div>
+      </div>
 
-        <div class="destino">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Praia_de_Ponta_Negra_em_Natal.jpg" alt="Natal">
-            <h2>Natal</h2>
-            <p>Dunas incríveis, mar cristalino e o famoso pôr do sol na Praia de Ponta Negra.</p>
-        </div>
-
-        <div class="destino">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Santiago_chile_cityscape.jpg" alt="Santiago">
-            <h2>Santiago</h2>
-            <p>A capital do Chile oferece neve, vinhos, cordilheira e uma vida urbana vibrante.</p>
-        </div>
-
-        <div class="destino">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Buenos_Aires_-_View.jpg" alt="Buenos Aires">
-            <h2>Buenos Aires</h2>
-            <p>Tango, arquitetura charmosa e culinária incrível na capital da Argentina.</p>
-        </div>
-
+      <div>
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=60" alt="luxury hero" style="width:340px;height:220px;object-fit:cover;border-radius:12px;box-shadow:0 12px 30px rgba(2,6,23,0.6)">
+      </div>
     </section>
 
-    <footer>
-        <p>&copy; 2025 Agência de Viagens. Todos os direitos reservados.</p>
-    </footer>
+    <section id="catalog">
+      <div id="cards" class="grid">
+        <!-- Cards serão renderizados via JavaScript -->
+      </div>
+    </section>
 
+    <!-- Modal de visualização -->
+    <div id="modal" class="modal-backdrop" role="dialog" aria-hidden="true">
+      <div class="modal" role="document">
+        <div style="display:flex;gap:12px;align-items:center">
+          <h2 id="modal-title"></h2>
+          <button class="close" onclick="closeModal()">✕</button>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <div class="col-img">
+            <img id="modal-img" src="" alt="imagem do carro">
+          </div>
+          <div class="col-info">
+            <p id="modal-price" style="font-size:1.25rem;font-weight:800;margin:0;margin-bottom:8px"></p>
+            <p id="modal-desc" style="color:var(--muted);margin-top:0"></p>
+            <div id="modal-specs" style="margin-top:12px;color:var(--muted)"></div>
+            <div style="margin-top:auto;display:flex;gap:8px">
+              <button class="btn">Pedir proposta</button>
+              <button class="ghost" onclick="closeModal()">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="contato" style="margin-top:28px;background:rgba(255,255,255,0.02);padding:18px;border-radius:12px">
+      <h3>Fale conosco</h3>
+      <p style="color:var(--muted)">Preencha o formulário para solicitar uma proposta.</p>
+      <form onsubmit="event.preventDefault();alert('Proposta enviada! (simulação)')" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+        <input required placeholder="Nome" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;min-width:200px;text-align:center">
+        <input required type="email" placeholder="Email" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;min-width:200px;text-align:center">
+        <input placeholder="Telefone" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;min-width:200px;text-align:center">
+        <textarea placeholder="Mensagem" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;width:100%;min-height:80px;text-align:center"></textarea>
+        <button class="btn" style="margin-left:auto">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site">© LuxuryCars — Todos os direitos reservados</footer>
+
+  <script>
+    // Dados do catálogo (pode ser trocado por fetch de uma API)
+    const cars = [
+      {
+        id:1,brand:'Rolls-Royce',model:'Phantom',type:'Sedan',price:'R$ 4.200.000',
+        img:'img/imagem-1.jpg.jpg',
+        desc:'Luxo absoluto com acabamento artesanal, motor V12 e tecnologia de ponta.',
+        specs:['Motor: V12','0-100 km/h: 5.2s','Potência: 563 cv']
+      },
+      {
+        id:2,brand:'Lamborghini',model:'Huracán EVO',type:'Coupe',price:'R$ 2.100.000',
+        img:'img/imagem-2.jpg.jpg',
+        desc:'Desempenho extremo, aerodinâmica avançada e design agressivo.',
+        specs:['Motor: V10','0-100 km/h: 2.9s','Potência: 631 cv']
+      },
+      {
+        id:3,brand:'Lamborghini',model:'centenário',type:'coupe',price:'R$ 3.500.000',
+        img:'img/imagem-3.jpg',
+        desc:'Uma experiência inesquecível.',
+        specs:['Motor: V12','0-100 km/h: 2.8s','potência: 770 cv']
+      },
+      {
+        id:4,brand:'Lamborghini',model:'Aventador svj',type:'coupe',price:'R$2.000.000',
+        img:'img/imagem-4.jpg',
+        desc:'Um sonho.',
+        specs:['Motor: V12','0-100 km/h: 2,8s','potência: 770 CV']
+      },
+      {
+        id:5,brand:'Bentley',model:'Bentayga',type:'SUV',price:'R$ 1.900.000',
+        img:'img/imagem-5.jpg',
+        desc:'SUV de luxo com conforto extremo e muita presença na estrada.',
+        specs:['Motor: W12','Capacidade: 5 passageiros','Tecnologia de suspensão']
+      },
+      {
+        id:6,brand:'Ferrari',model:'Portofino M',type:'Convertible',price:'R$ 1.800.000',
+        img:'img/imagem-6.jpg',
+        desc:'Conversível esportivo, ideal para quem quer performance com estilo.',
+        specs:['Motor: V8','0-100 km/h: 3.5s','Potência: 610 cv']
+      },
+      {
+        id:7,brand:'Mercedes-Benz',model:'amg-gtr',type:'Sedan',price:'R$ 850.000',
+        img:'img/imagem-7.jpg',
+        desc:'Tecnologia, segurança e conforto em um sedã executivo de referência.',
+        specs:['Motor: V8 Biturbo','0-100 km/h: 3,6s','potência: 585 cv']
+      },
+      {
+        id:8,brand:'Porsche',model:'Cayenne Turbo',type:'SUV',price:'R$ 780.000',
+        img:'img/imagem-8.jpg',
+        desc:'SUV esportivo com comportamento dinâmico e acabamento premium.',
+        specs:['Motor: V8','0-100 km/h: 4.1s','Potência: 550 cv']
+      },
+      {
+       id:9,brand:'porche',model:'911 turbo S',type:'sedan',price:'R$ 1.200.000',
+       img:'img/imagem-9.jpg',
+       desc:'Um sedan de puro luxo.',
+       specs:['Motor: V8 biturbo','0-100 km/h: 3.7S','potência: 650 CV']     
+      },
+      {
+       id:10,brand:'astom martin',model:'DB9',type:'sedan',price:'R$ 2.000.000',
+       img:'img/imagem-10.jpg',
+       desc:'Luxuoso, feito à mão com couro, madeira nobre e alumínio',
+       specs:['Motor: V12 aspirado','0-100 km/h 4.6S','potência: 540 CV']
+      },
+      {
+       id:11,brand:'ferrari',model:'Laferrari',type:'sedan',price:'R$ 3.200.000',
+       img:'img/imagem-11.jpg',
+       desc:'Um hipercarro inspirado na fórmula 1',
+       specs:['Motor: V12 6.3L aspirado','0-100 km/h 2.6S','potência: 963 CV']
+      },
+      {
+       id:12,brand:'ferrari',model:'SF90 stradale',type:'sedan',price:'R$ 5.000.000',
+       img:'img/imagem-12.jpg',
+       desc:'Inspirado em carros de corrida, com telas digitais de alta definição',
+       specs:['Motor: V8 biturbo 4.0L aspirado','0-100 km/h 2.5S','potência: 1.000 CV']
+      },
+      {
+       id:13,brand:'ferrari',model:'daytona SP3',type:'sedan',price:'R$ 12.000.000',
+       img:'img/imagem-13.jpg',
+       desc:'Uma experiência única',
+       specs:['Motor: V12 aspirado de 6.5L','0-100 km/h 2.8S','potência: 840 CV, 9.250 rpm']
+      },
+      {
+       id:14,brand:'ferrari',model:'812 competizione',type:'sedan',price:'R$ 1.200.000',
+       img:'img/imagem-14.jpg',
+       desc:'É de arrepiar!',
+       specs:['Motor: V12 aspirado de 6.5L','0-100 km/h 2.8S','potência: 830 CV']
+      },
+      {
+       id:15,brand:'mclaren',model:'p1',type:'sedan',price:'R$ 2.500.00',
+       img:'img/imagem-15.jpg',
+       desc:'O carro dos sonhos',
+       specs:['Motor: V8 de 3,8L','0-100 km/h 2,8S','POtência: 916 CV']
+      },
+      {
+       id:16,brand:'maclaren',model:'senna',type:'sedan',prince:'R$ 1.200.00',
+       img:'img/imagem-16.jpg',
+       desc:'puro luxo!',
+       specs:['Motor: V8 4.0L biturbo','0-100 km/h 2.8S','potência: 800CV']
+      }
+       
+    ];
+
+    let currentFilter = 'all';
+
+    function formatSpecs(specs){
+      return specs.map(s => `<div>• ${s}</div>`).join('');
+    }
+
+    function renderCards(){
+      const container = document.getElementById('cards');
+      const q = document.getElementById('search').value.trim().toLowerCase();
+      container.innerHTML = '';
+      const filtered = cars.filter(c => {
+        const matchesFilter = currentFilter==='all' ? true : c.type===currentFilter;
+        const matchesQuery = q === '' ? true : (c.brand.toLowerCase()+ ' '+ c.model.toLowerCase()).includes(q);
+        return matchesFilter && matchesQuery;
+      });
+
+      if(filtered.length===0){
+        container.innerHTML = '<div style="color:var(--muted);grid-column:1/-1;padding:16px">Nenhum modelo encontrado.</div>';
+        return;
+      }
+
+      for(const car of filtered){
+        const card = document.createElement('article');
+        card.className='card';
+        card.innerHTML = `
+          <div class="thumb"><img src="${car.img}" alt="${car.brand} ${car.model}"></div>
+          <div class="meta">
+            <h3>${car.brand} ${car.model}</h3>
+            <div class="price">${car.price}</div>
+          </div>
+          <div class="specs">${car.type} · ${car.specs[0]} · ${car.specs[1]}</div>
+          <footer>
+            <button class="ghost" onclick='openModal(${car.id})'>Ver detalhes</button>
+            <button class="btn" onclick='alert("Solicitação de proposta para ${car.brand} ${car.model} (simulação)")'>Pedir proposta</button>
+          </footer>
+        `;
+        container.appendChild(card);
+      }
+    }
+
+    function setFilter(type){
+      currentFilter = type;
+      renderCards();
+      // marca visual simples
+      document.querySelectorAll('.chip').forEach(c=>c.style.outline='');
+      const active = document.querySelector(`.chip[data-filter=\"${type}\"]`);
+      if(active) active.style.outline='2px solid rgba(255,255,255,0.06)';
+    }
+
+    function resetFilters(){
+      currentFilter='all';
+      document.getElementById('search').value='';
+      renderCards();
+    }
+
+    function openModal(id){
+      const car = cars.find(c=>c.id===id);
+      if(!car) return;
+      document.getElementById('modal-title').textContent = `${car.brand} ${car.model}`;
+      document.getElementById('modal-img').src = car.img;
+      document.getElementById('modal-price').textContent = car.price;
+      document.getElementById('modal-desc').textContent = car.desc;
+      document.getElementById('modal-specs').innerHTML = formatSpecs(car.specs);
+      const modal = document.getElementById('modal');
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden','false');
+    }
+
+    function closeModal(){
+      const modal = document.getElementById('modal');
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden','true');
+    }
+
+    // fecha modal ao pressionar Esc
+    window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+
+    // inicializa
+    renderCards();
+  </script>
 </body>
 </html>
+\

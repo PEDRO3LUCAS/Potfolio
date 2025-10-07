@@ -1,15 +1,11 @@
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open("app-saudacao-cache").then(cache => {
+    caches.open("app-luxcar-cache").then(cache => {
       return cache.addAll([
         "index.html",
         "manifest.json",
         "icon-192.png",
         "icon-512.png",
-        "manha.jpg",
-        "tarde.jpg",
-        "noite.jpg",
-        "madrugada.jpg"
       ]);
     })
   );
